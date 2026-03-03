@@ -1,0 +1,1 @@
+Hi! This is my first self-coded website ever, so it is kind of bad. This is a website where you can vote for the photos I took on my camera. If you click a vote button and you want to change your vote, just click reset! Have fun looking at my photos! Otherwise, not much else to do on the website.
