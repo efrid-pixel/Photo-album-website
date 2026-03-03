@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<style>
+body {
+    background-image: url("images/Photo Wall.png");
+    background-size: cover;        
+    background-repeat: no-repeat;
+}
+
+#reset {
+    position: absolute;
+    left: 580px;
+    top: 34px;
+}
+
+#flowerpotNumb {
+    position: absolute;
+    left: 505px;
+    top: 290px;
+}
+
+#buttonFlowerPot {
+    position: absolute;
+    left: 480px;
+    top: 350px;
+}
+
+#shellNumb {
+    position: absolute;
+    left: 860px;
+    top: 290px;
+}
+
+#buttonShell {
+    position: absolute;
+    left: 835px;
+    top: 350px;
+}
+
+#CatNumb {
+    position: absolute;
+    left: 1215px;
+    top: 290px;
+}
+#buttonCat {
+    position: absolute;
+    left: 1190px;
+    top: 350px;
+}
+
+#HandNumb {
+    position: absolute;
+    left: 505px;
+    top: 670px;
+}
+#buttonHand {
+    position: absolute;
+    left: 480px;
+    top: 730px;
+}
+
+#PianoNumb {
+    position: absolute;
+    left: 860px;
+    top: 670px;
+}
+
+#buttonPiano {
+    position: absolute;
+    left: 835px;
+    top: 730px;
+}
+
+#RoseNumb {
+    position: absolute;
+    left: 1215px;
+    top: 670px;
+}
+#buttonRose {
+    position: absolute;
+    left: 1190px;
+    top: 730px;
+}
+
+.vote-btn {
+    border: none;
+    border-radius: 999px
+}
+
+</style>
+
+<body>
+
+<h1 style="text-align:center; color:rgb(0, 71, 73);">my photos :3</h1>
+<h2 style="text-align:center; color:rgb(0, 71, 73);">click to vote for your favorite one! they will change from time to time, so make sure to keep this page saved!</h2>
+
+<h2 id="flowerpotNumb" style="color:white;"></h2>
+<button id="buttonFlowerPot"; class="vote-btn">vote</button>
+
+<h2 id="shellNumb" style="color:white;"></h2>
+<button id="buttonShell"; class="vote-btn">vote</button>
+
+<h2 id="CatNumb" style="color:white;"></h2>
+<button id="buttonCat"; class="vote-btn">vote</button>
+
+<h2 id="HandNumb" style="color:white;"></h2> 
+<button id="buttonHand"; class="vote-btn">vote</button>
+
+<h2 id="PianoNumb" style="color:white;"></h2>
+<button id="buttonPiano"; class="vote-btn">vote</button>
+
+<h2 id="RoseNumb" style="color:white;"></h2>
+<button id="buttonRose"; class="vote-btn">vote</button>
+
+<button id="reset"; class="vote-btn">reset</button>
+
+<script>
+let x = Number(localStorage.getItem("x")) || 0;
+let y = Number(localStorage.getItem("y")) || 0;
+let z = Number(localStorage.getItem("z")) || 0;
+let a = Number(localStorage.getItem("a")) || 0;
+let b = Number(localStorage.getItem("b")) || 0;
+let c = Number(localStorage.getItem("c")) || 0;
+
+const voteButtons = [
+  "buttonFlowerPot",
+  "buttonShell",
+  "buttonCat",
+  "buttonHand",
+  "buttonPiano",
+  "buttonRose"
+].map(id => document.getElementById(id));
+
+function disableAllVoteButtons() {
+  voteButtons.forEach(btn => btn.disabled = true);
+}
+
+function alreadyVoted() {
+  return localStorage.getItem("hasVoted") === "true";
+}
+
+function finalizeVote() {
+  localStorage.setItem("hasVoted", "true");
+  disableAllVoteButtons();
+}
+
+if (alreadyVoted()) {
+  disableAllVoteButtons();
+}
+
+
+function updateFlowerpot() {
+    document.getElementById("flowerpotNumb").textContent = x;
+}
+
+function updateShell() {
+    document.getElementById("shellNumb").textContent = y;
+}
+
+function updateCat() {
+    document.getElementById("CatNumb").textContent = z;
+}
+
+function updateHand() {
+    document.getElementById("HandNumb").textContent = a;
+}
+
+function updatePiano() {
+    document.getElementById("PianoNumb").textContent = b;
+}
+
+function updateRose() {
+    document.getElementById("RoseNumb").textContent = c;
+}
+
+function votedFlowerpot() {
+    if (alreadyVoted()) return;
+    x++;
+    localStorage.setItem("x", x);
+    updateFlowerpot();
+    finalizeVote();
+}
+
+function votedShell() {
+    if (alreadyVoted()) return;
+    y++;
+    localStorage.setItem("y", y);
+    updateShell();
+    finalizeVote();
+}
+
+function votedCat() {
+    if (alreadyVoted()) return;
+    z++;
+    localStorage.setItem("z", z);
+    updateCat();
+    finalizeVote();
+}
+
+function votedHand() {
+    if (alreadyVoted()) return;
+    a++;
+    localStorage.setItem("a", a);
+    updateHand();
+    finalizeVote();
+}
+
+function votedPiano() {
+    if (alreadyVoted()) return;
+    b++;
+    localStorage.setItem("b", b);
+    updatePiano();
+    finalizeVote();
+}
+
+function votedRose() {
+    if (alreadyVoted()) return;
+    c++;
+    localStorage.setItem("c", c);
+    updateRose();
+    finalizeVote();
+}
+
+function resetAll() {
+  localStorage.clear();
+  location.reload();
+}
+
+document.getElementById("reset").addEventListener("click", resetAll);
+
+document.getElementById("buttonFlowerPot")
+    .addEventListener("click", votedFlowerpot);
+
+document.getElementById("buttonShell")
+    .addEventListener("click", votedShell);
+
+document.getElementById("buttonCat")
+    .addEventListener("click", votedCat);
+
+document.getElementById("buttonHand")
+    .addEventListener("click", votedHand);
+
+document.getElementById("buttonPiano")
+    .addEventListener("click", votedPiano);
+
+document.getElementById("buttonRose")
+    .addEventListener("click", votedRose);
+updateFlowerpot();
+updateShell();
+updateCat();
+updateHand();
+updatePiano();
+updateRose();
+</script>
+
+</body>
+</html>
